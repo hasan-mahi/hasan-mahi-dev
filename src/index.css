@@ -1,0 +1,26 @@
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+  background-color: #121212;
+  color: #fff;
+  overflow-x: hidden;
+  overflow-y: hidden; /* Prevent default scrollbar */
+}
+
+.snap-container {
+  height: 100vh;
+  overflow-y: scroll; /* Only scrollable container */
+  scroll-snap-type: y mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.snap-child {
+  scroll-snap-align: start;
+  min-height: 100vh;
+  padding: 60px 20px;
+  box-sizing: border-box;
+}
+
+/* Your other section background and styles remain unchanged */
