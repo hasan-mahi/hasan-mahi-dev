@@ -12,7 +12,7 @@ export default function Projects() {
       <Typography variant="h4" className="section-title">Projects</Typography>
     <Grid container spacing={4}>
   {projects.map((p, i) => (
-    <Grid item xs={12} md={6} key={i}>
+    <Grid key={i}>
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}

@@ -13,8 +13,6 @@ import FadeInSection from "./effect/FadeInSection";
 import SectionDivider from "./effect/SectionDivider";
 import WaveBackground from "./effect/WaveBackground";
 import MouseGlowTrail from "./effect/MouseGlowTrail";
-import { ScrollReactiveGlow } from "./effect/ScrollReactiveGlow";
-import ClickSparkles from "./effect/ClickSparkles";
 
 import "./index.css";
 
@@ -25,8 +23,6 @@ export default function App() {
       {/* Background and interactive effects */}
       <WaveBackground />
       <MouseGlowTrail />
-      <ScrollReactiveGlow />
-      <ClickSparkles />
 
       <Header />
 
