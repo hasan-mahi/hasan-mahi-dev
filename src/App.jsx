@@ -2,7 +2,7 @@
 import React from "react";
 import { CssBaseline, Box } from "@mui/material";
 
-import Header from "./components/Header";
+import Header from "./components/header/Header";
 import Hero from "./components/Hero";
 import About from "./components/About";
 import Projects from "./components/Projects";

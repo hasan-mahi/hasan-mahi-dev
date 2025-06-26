@@ -1,4 +1,3 @@
-// src/components/Header.jsx
 import React, { useState, useEffect, useRef } from "react";
 import {
   AppBar,
@@ -10,12 +9,13 @@ import {
   ListItem,
   ListItemButton,
   ListItemText,
-  IconButton,
   useMediaQuery,
+  useScrollTrigger,
 } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "@mui/material/styles";
+
+import Switch from "./Switch";
 
 const navLinks = [
   { label: "About", href: "#about" },
@@ -25,8 +25,12 @@ const navLinks = [
 ];
 
 const appBarVariants = {
-  hidden: { opacity: 0, y: -30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+  hidden: { y: -80, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: { duration: 0.5, ease: "easeOut" },
+  },
 };
 
 export default function Header() {
@@ -36,13 +40,22 @@ export default function Header() {
   const [activeSection, setActiveSection] = useState(null);
   const observer = useRef(null);
 
-  const toggleDrawer = (open) => () => setDrawerOpen(open);
+  const trigger = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: 40,
+  });
 
-  // Scrollspy with Intersection Observer
+  // Close drawer when switching to desktop view
+  useEffect(() => {
+    if (!isMobile && drawerOpen) setDrawerOpen(false);
+  }, [isMobile, drawerOpen]);
+
+  // Scrollspy active section
   useEffect(() => {
     const sections = navLinks
       .map(({ href }) => document.querySelector(href))
       .filter(Boolean);
+
     if (!sections.length) return;
 
     observer.current = new IntersectionObserver(
@@ -65,6 +78,12 @@ export default function Header() {
     };
   }, []);
 
+  // Toggle drawer state from Switch
+  const toggleDrawer = (open) => {
+    setDrawerOpen(open);
+  };
+
+  // Drawer menu content
   const drawer = (
     <Box
       sx={{
@@ -74,8 +93,8 @@ export default function Header() {
         height: "100%",
         color: "#00f7ff",
       }}
-      onClick={toggleDrawer(false)}
-      onKeyDown={toggleDrawer(false)}
+      onClick={() => toggleDrawer(false)}
+      onKeyDown={() => toggleDrawer(false)}
     >
       <List>
         {navLinks.map(({ label, href }) => (
@@ -85,8 +104,7 @@ export default function Header() {
               href={href}
               sx={{
                 color: activeSection === href ? "#0ff" : "#00f7ff",
-                textShadow:
-                  activeSection === href ? "0 0 8px #0ff" : "none",
+                textShadow: activeSection === href ? "0 0 8px #0ff" : "none",
                 "&:hover": {
                   color: "#0ff",
                   textShadow: "0 0 10px #0ff",
@@ -137,11 +155,14 @@ export default function Header() {
             position="static"
             elevation={0}
             sx={{
-              bgcolor: "rgba(18, 18, 18, 0.6)",
-              backdropFilter: "blur(14px)",
-              WebkitBackdropFilter: "blur(14px)",
-              boxShadow: "none",
-              borderBottom: "none",
+              bgcolor: trigger ? "rgba(0,255,255,0.03)" : "transparent",
+              backdropFilter: "none",
+              WebkitBackdropFilter: "none",
+              boxShadow: trigger ? "0 0 12px rgba(0,255,255,0.12)" : "none",
+              borderBottom: trigger
+                ? "1px solid rgba(0,255,255,0.15)"
+                : "none",
+              transition: "all 0.3s ease-in-out",
             }}
           >
             <Toolbar
@@ -149,14 +170,13 @@ export default function Header() {
                 justifyContent: isMobile ? "flex-end" : "flex-end",
                 flexWrap: "wrap",
                 px: 2,
+                minHeight: "64px",
               }}
             >
               {isMobile ? (
-                <IconButton edge="end" onClick={toggleDrawer(true)} aria-label="menu">
-                  <MenuIcon sx={{ color: "#00f7ff" }} />
-                </IconButton>
+                <Switch isOpen={drawerOpen} onToggle={toggleDrawer} />
               ) : (
-                <Box sx={{ display: "flex", gap: 2 }}>
+                <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
                   {navLinks.map(({ label, href }) => (
                     <motion.div
                       key={href}
@@ -169,10 +189,9 @@ export default function Header() {
                           color: activeSection === href ? "#0ff" : "#00f7ff",
                           textTransform: "capitalize",
                           fontWeight: 500,
-                          textShadow:
-                            activeSection === href
-                              ? "0 0 10px #0ff"
-                              : "0 0 5px #00f7ff",
+                          textShadow: activeSection === href
+                            ? "0 0 10px #0ff"
+                            : "0 0 5px #00f7ff",
                           transition: "all 0.3s ease",
                           "&:hover": {
                             color: "#0ff",
@@ -184,7 +203,10 @@ export default function Header() {
                       </Button>
                     </motion.div>
                   ))}
-                  <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+                  <motion.div
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
                     <Button
                       href="/Hasan_Resume.pdf"
                       download
@@ -215,7 +237,7 @@ export default function Header() {
       <Drawer
         anchor="right"
         open={drawerOpen}
-        onClose={toggleDrawer(false)}
+        onClose={() => toggleDrawer(false)}
         PaperProps={{
           sx: {
             bgcolor: "rgba(18,18,18,0.85)",
