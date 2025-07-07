@@ -1,17 +1,17 @@
 html, body, #root {
   height: 100%;
   margin: 0;
+  padding: 0;
   scroll-behavior: smooth;
-  scroll-snap-type: y mandatory;
   background-color: #121212;
   color: #fff;
-  overflow-x: hidden;
-  overflow-y: hidden; /* Prevent default scrollbar */
+  overflow-x: hidden; /* ✅ Prevent horizontal scroll */
 }
 
 .snap-container {
   height: 100vh;
-  overflow-y: scroll; /* Only scrollable container */
+  overflow-y: auto; /* ✅ Enable vertical scroll here */
+  overflow-x: hidden; /* ✅ Safety */
   scroll-snap-type: y mandatory;
   -webkit-overflow-scrolling: touch;
 }
@@ -19,8 +19,8 @@ html, body, #root {
 .snap-child {
   scroll-snap-align: start;
   min-height: 100vh;
-  padding: 60px 20px;
+  padding: 64px 20px; /* Assuming your header is 64px */
   box-sizing: border-box;
+  width: 100%;
+  overflow-x: hidden; /* ✅ Safety for child elements */
 }
-
-/* Your other section background and styles remain unchanged */

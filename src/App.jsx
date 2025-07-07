@@ -20,10 +20,8 @@ export default function App() {
   return (
     <>
       <CssBaseline />
-      {/* Background and interactive effects */}
       <WaveBackground />
       <MouseGlowTrail />
-
       <Header />
 
       <Box
@@ -34,42 +32,43 @@ export default function App() {
           overflowY: "scroll",
           height: "100vh",
           scrollBehavior: "smooth",
+          pt: "64px", // ✅ Offset for sticky navbar
         }}
       >
-        <Box sx={{ scrollSnapAlign: "start", minHeight: "100vh", px: 3, py: 5 }}>
-          <FadeInSection variant="zoomIn" className="hero-section">
+        <Box id="hero" sx={{ scrollSnapAlign: "start", minHeight: "calc(100vh - 64px)", px: 3, py: 5 }}>
+          <FadeInSection variant="zoomIn">
             <Hero />
           </FadeInSection>
         </Box>
 
         <SectionDivider />
 
-        <Box sx={{ scrollSnapAlign: "start", minHeight: "100vh", px: 3, py: 5 }}>
-          <FadeInSection variant="slideLeft" delay={0.1} className="about-section">
+        <Box id="about" sx={{ scrollSnapAlign: "start", minHeight: "calc(100vh - 64px)", px: 3, py: 5 }}>
+          <FadeInSection variant="slideLeft" delay={0.1}>
             <About />
           </FadeInSection>
         </Box>
 
         <SectionDivider flip />
 
-        <Box sx={{ scrollSnapAlign: "start", minHeight: "100vh", px: 3, py: 5 }}>
-          <FadeInSection variant="slideRight" delay={0.2} className="projects-section">
+        <Box id="projects" sx={{ scrollSnapAlign: "start", minHeight: "calc(100vh - 64px)", px: 3, py: 5 }}>
+          <FadeInSection variant="slideRight" delay={0.2}>
             <Projects />
           </FadeInSection>
         </Box>
 
         <SectionDivider />
 
-        <Box sx={{ scrollSnapAlign: "start", minHeight: "100vh", px: 3, py: 5 }}>
-          <FadeInSection variant="fadeDelayed" delay={0.3} className="skills-section">
+        <Box id="skills" sx={{ scrollSnapAlign: "start", minHeight: "calc(100vh - 64px)", px: 3, py: 5 }}>
+          <FadeInSection variant="fadeDelayed" delay={0.3}>
             <Skills />
           </FadeInSection>
         </Box>
 
         <SectionDivider flip />
 
-        <Box sx={{ scrollSnapAlign: "start", minHeight: "100vh", px: 3, py: 5 }}>
-          <FadeInSection variant="fadeUp" delay={0.4} className="contact-section">
+        <Box id="contact" sx={{ scrollSnapAlign: "start", minHeight: "calc(100vh - 64px)", px: 3, py: 5 }}>
+          <FadeInSection variant="fadeUp" delay={0.4}>
             <Contact />
           </FadeInSection>
         </Box>
