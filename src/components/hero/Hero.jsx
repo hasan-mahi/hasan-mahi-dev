@@ -1,15 +1,7 @@
 import React from "react";
-import {
-  Box,
-  Typography,
-  Button,
-  Stack,
-  IconButton,
-  Tooltip,
-} from "@mui/material";
-import GitHubIcon from "@mui/icons-material/GitHub";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import GradientText from "../colorAnimation/GradientText";
+import { Box, Typography, Button, Stack } from "@mui/material";
+import GradientText from "../colorAnimation/GradientText"; // Adjust path if needed
+import SocialLinks from "./SocialLinks"; // Adjust path if needed
 import { circularFloat, glow } from "./float";
 import { wave, fadeSlideUp } from "./heroEffects";
 
@@ -32,7 +24,7 @@ export default function Hero() {
         fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
       }}
     >
-      {/* 👤 Floating profile image */}
+      {/* Floating Profile Image */}
       <Box
         sx={{
           width: 180,
@@ -64,95 +56,40 @@ export default function Hero() {
         />
       </Box>
 
-      {/* 📄 Text and Info */}
+      {/* Text Content */}
       <Box
         maxWidth={550}
         sx={{
           animation: `${fadeSlideUp} 1.4s ease forwards`,
         }}
       >
-        {/* 👨‍💻 Title and Social Icons */}
-          <Box
+        {/* Title and Social Links */}
+        <Box sx={{ mb: 1 }}>
+          <Typography
+            variant="subtitle2"
             sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "flex-start",
-              gap: 2,
-              mb: 1,
-              flexWrap: "wrap",
+              color: "#00f7ff",
+              letterSpacing: 3,
+              fontWeight: 700,
+              textTransform: "uppercase",
+              userSelect: "none",
             }}
-          >
-            <Typography
-              variant="subtitle2"
-              sx={{
-                color: "#00f7ff",
-                letterSpacing: 3,
-                fontWeight: 700,
-                textTransform: "uppercase",
-                userSelect: "none",
-              }}
           >
             Full Stack Developer
           </Typography>
 
-          {/* 🔗 GitHub */}
-          <Tooltip title="GitHub" arrow>
-            <IconButton
-              component="a"
-              href="https://github.com/hasan-mahi"
-              target="_blank"
-              rel="noopener noreferrer"
-              sx={{
-                color: "#00f7ff",
-                border: "2px solid",
-                borderColor: "#00f7ff",
-                width: 32,
-                height: 32,
-                padding: 0,
-                transition: "all 0.3s ease",
-                "&:hover": {
-                  color: "#0ff",
-                  borderColor: "#0ff",
-                  boxShadow: "0 0 12px #00f7ff",
-                  transform: "scale(1.1)",
-                },
-              }}
-              aria-label="GitHub"
-            >
-              <GitHubIcon fontSize="small" />
-            </IconButton>
-          </Tooltip>
-
-          {/* 🔗 LinkedIn */}
-          <Tooltip title="LinkedIn" arrow>
-            <IconButton
-              component="a"
-              href="https://linkedin.com/in/hasan-mahi"
-              target="_blank"
-              rel="noopener noreferrer"
-              sx={{
-                color: "#00f7ff",
-                border: "2px solid",
-                borderColor: "#00f7ff",
-                width: 32,
-                height: 32,
-                padding: 0,
-                transition: "all 0.3s ease",
-                "&:hover": {
-                  color: "#0ff",
-                  borderColor: "#0ff",
-                  boxShadow: "0 0 12px #00f7ff",
-                  transform: "scale(1.1)",
-                },
-              }}
-              aria-label="LinkedIn"
-            >
-              <LinkedInIcon fontSize="small" />
-            </IconButton>
-          </Tooltip>
+          {/* Social links - only on md and up */}
+          <Box sx={{ display: { xs: "none", md: "flex" }, gap: 2, mt: 2 }}>
+            <SocialLinks />
+          </Box>
         </Box>
 
-        {/* 🎨 Gradient Name + Emoji */}
+        {/* Social links - only on small screen below the title */}
+        <Box sx={{ display: { xs: "flex", md: "none" }, gap: 2, mb: 2 }}>
+          <SocialLinks />
+        </Box>
+
+        {/* Gradient name with waving emoji */}
         <Box
           sx={{
             display: "flex",
@@ -161,24 +98,29 @@ export default function Hero() {
             mb: 2,
           }}
         >
-        <GradientText
-  colors={["#40ffaa", "#4079ff", "#40ffaa", "#4079ff", "#40ffaa", "#4079ff"]}
-  animationSpeed={8}
-  showBorder={false}
-  className="hero-title"
-  style={{
-    fontWeight: 600,
-    fontSize: "clamp(2rem, 4vw, 3rem)", // ⬅️ Slightly smaller
-    lineHeight: 1.2,
-    userSelect: "none",
-    margin: 0,
-  }}
->
-  Hi, I'm Hasan Mahi
-</GradientText>
+          <GradientText
+            colors={[
+              "#40ffaa",
+              "#4079ff",
+              "#40ffaa",
+              "#4079ff",
+              "#40ffaa",
+              "#4079ff",
+            ]}
+            animationSpeed={8}
+            showBorder={false}
+            className="hero-title"
+            style={{
+              fontWeight: 600,
+              fontSize: "clamp(2rem, 4vw, 3rem)",
+              lineHeight: 1.2,
+              userSelect: "none",
+              margin: 0,
+            }}
+          >
+            Hi, I'm Hasan Mahi
+          </GradientText>
 
-
-          {/* 👋 Waving Emoji */}
           <Box
             component="span"
             sx={{
@@ -199,7 +141,7 @@ export default function Hero() {
           </Box>
         </Box>
 
-        {/* 📝 Description */}
+        {/* Description */}
         <Typography
           variant="body1"
           sx={{
@@ -210,12 +152,12 @@ export default function Hero() {
           }}
         >
           Passionate about building modern, scalable web apps using{" "}
-          <strong>Node.js</strong>, <strong>Laravel</strong>, <strong>React</strong> and{" "}
-          <strong>MongoDB</strong>. I create seamless user experiences,
+          <strong>Node.js</strong>, <strong>Laravel</strong>, <strong>React</strong>{" "}
+          and <strong>MongoDB</strong>. I create seamless user experiences,
           blending clean code with solid backend logic.
         </Typography>
 
-        {/* 🔘 CTA Buttons */}
+        {/* Call to Action Buttons */}
         <Stack
           direction={{ xs: "column", sm: "row" }}
           spacing={3}

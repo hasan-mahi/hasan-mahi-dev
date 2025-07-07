@@ -6,20 +6,22 @@ import {
   Card,
   CardContent,
   CardActions,
+  CardMedia,
   Button,
 } from "@mui/material";
 import { motion } from "framer-motion";
-import { moveGradient, gradientColors } from "./colorAnimation/gradient"; // ✅ Import shared styles
+import { moveGradient, gradientColors } from "./colorAnimation/gradient";
 
 const projects = [
-  {
+ {
     title: "Online Auto Auction System",
     description: [
       "Car auction platform with real-time bidding",
       "MongoDB for data storage",
       "Push notifications and user authentication",
     ],
-    link: "#",
+    link: "https://github.com/hasan-mahi/Online-Auto-Auction-System-Car-based-Auction",
+    image: "https://github.com/hasan-mahi/Online-Auto-Auction-System-Car-based-Auction"
   },
   {
     title: "Restaurant Ordering System",
@@ -28,7 +30,8 @@ const projects = [
       "PHP-based backend with MySQL database",
       "CRUD operations and user authentication",
     ],
-    link: "#",
+    link: "https://github.com/hasan-mahi/RestaurantOrderingSystem",
+    image: "https://github.com/hasan-mahi/RestaurantOrderingSystem"
   },
   {
     title: "Airbnb Project",
@@ -37,7 +40,8 @@ const projects = [
       "Booking platform using React and Node.js",
       "Dynamic listings and authentication",
     ],
-    link: "https://airbnb-project-68u9.onrender.com",
+    link: "https://github.com/hasan-mahi/Airbnb-Project",
+    image: "https://github.com/hasan-mahi/Airbnb-Project"
   },
   {
     title: "Tenant Management System",
@@ -46,19 +50,20 @@ const projects = [
       "Built with React and Node.js",
       "Includes authentication and dashboard",
     ],
-    link: "https://airbnb-project-68u9.onrender.com",
+     link: "https://github.com/hasan-mahi/Tenant-Management_admin",
+    image: "https://github.com/hasan-mahi/Tenant-Management_admin"
   },
   {
-    title: "Car Service Management System",
+    title: "Car Service Booking System",
     description: [
       "Booking and service tracking platform",
       "React frontend with Node.js backend",
       "Invoice and customer management",
     ],
-    link: "https://airbnb-project-68u9.onrender.com",
+    link: "https://github.com/hasan-mahi/Car-Service-Booking-System",
+    image: "https://github.com/hasan-mahi/Car-Service-Booking-System"
   },
 ];
-
 
 export default function Projects() {
   return (
@@ -93,7 +98,9 @@ export default function Projects() {
                 sx={{
                   borderRadius: 3,
                   p: "2px",
-                  background: `linear-gradient(270deg, ${gradientColors.join(",")})`,
+                  background: `linear-gradient(270deg, ${gradientColors.join(
+                    ","
+                  )})`,
                   backgroundSize: "400% 100%",
                   animation: `${moveGradient} 9s linear infinite`,
                   "&:hover": {
@@ -116,11 +123,25 @@ export default function Projects() {
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "space-between",
-                    p: 3,
+                    p: 0,
                     border: "none",
                   }}
                 >
-                  <CardContent sx={{ p: 0, mb: 3 }}>
+                  {p.image && (
+                    <CardMedia
+                      component="img"
+                      image={p.image}
+                      alt={p.title}
+                      sx={{
+                        height: 180,
+                        objectFit: "cover",
+                        borderTopLeftRadius: 8,
+                        borderTopRightRadius: 8,
+                      }}
+                    />
+                  )}
+
+                  <CardContent sx={{ p: 3, pb: 2 }}>
                     <Typography variant="h6" sx={{ fontWeight: 700, mb: 1 }}>
                       {p.title}
                     </Typography>
@@ -140,7 +161,9 @@ export default function Projects() {
                     </Typography>
                   </CardContent>
 
-                  <CardActions sx={{ justifyContent: "flex-end", px: 0, pb: 0 }}>
+                  <CardActions
+                    sx={{ justifyContent: "flex-end", px: 3, pb: 2 }}
+                  >
                     <Button
                       size="small"
                       href={p.link}

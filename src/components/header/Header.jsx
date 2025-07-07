@@ -52,6 +52,17 @@ export default function Header() {
 
     sections.forEach((section) => observer.current.observe(section));
 
+    // 🟢 Scroll to section on initial load if hash is present
+    const hash = window.location.hash;
+    if (hash) {
+      const target = document.querySelector(hash);
+      if (target) {
+        setTimeout(() => {
+          target.scrollIntoView({ behavior: "smooth" });
+        }, 100);
+      }
+    }
+
     return () => {
       if (observer.current) {
         sections.forEach((section) => observer.current.unobserve(section));
@@ -108,7 +119,7 @@ export default function Header() {
                 </Button>
               ))}
 
-              {/* Desktop Resume Button */}
+              {/* Resume Button - Desktop */}
               <a href="/Hasan-Mahi-Resume.pdf" download style={{ textDecoration: "none" }}>
                 <Button
                   variant="contained"
@@ -139,6 +150,7 @@ export default function Header() {
         </Toolbar>
       </AppBar>
 
+      {/* Mobile Drawer */}
       <Drawer
         anchor="right"
         open={drawerOpen}

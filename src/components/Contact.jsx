@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Typography,
@@ -10,37 +10,43 @@ import {
 import { keyframes } from "@emotion/react";
 
 const gradientAnimation = keyframes`
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 `;
 
 const gradientBorder = "linear-gradient(270deg, #00fff7, #0077ff, #00fff7)";
 
 export default function Contact() {
+  const [formData, setFormData] = useState({
+    name: "",
+    subject: "",
+    message: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const openGmailCompose = (data) => {
+    const subject = encodeURIComponent(data.subject || "New Message from Portfolio");
+    const body = encodeURIComponent(
+      `${data.message}\n\nRegards,\n${data.name}`
+    );
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=uddinhasan930@gmail.com&su=${subject}&body=${body}`;
+    window.open(gmailUrl, "_blank", "noopener,noreferrer");
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    openGmailCompose(formData);
+  };
+
   return (
-    <Box
-      sx={{
-        mx: "auto",
-        py: 6,
-        px: 2,
-        maxWidth: 700,
-      }}
-    >
+    <Box sx={{ mx: "auto", py: 6, px: 2, maxWidth: 700 }}>
       <Typography
         variant="h4"
-        sx={{
-          fontWeight: 600,
-    color: "#00f7ff", // same cyan color
-    textAlign: "center",
-    mb: 4,
-        }}
+        sx={{ fontWeight: 600, color: "#00f7ff", textAlign: "center", mb: 4 }}
       >
         Contact Me
       </Typography>
@@ -53,11 +59,9 @@ export default function Contact() {
           backgroundSize: "600% 600%",
           animation: `${gradientAnimation} 8s ease infinite`,
           boxShadow: "0 0 6px rgba(0, 255, 255, 0.1)",
-          transition: "transform 0.3s ease, box-shadow 0.3s ease",
           "&:hover": {
             animation: `${gradientAnimation} 4s ease infinite`,
-            boxShadow:
-              "0 0 10px #00e5ff, 0 0 12px #005eff, 0 0 14px #00e5ff",
+            boxShadow: "0 0 10px #00e5ff, 0 0 12px #005eff, 0 0 14px #00e5ff",
             transform: "scale(1.01)",
           },
         }}
@@ -71,87 +75,42 @@ export default function Contact() {
             p: 4,
             border: "none",
             boxShadow: "inset 0 0 8px rgba(0,0,0,0.25)",
-            transition: "box-shadow 0.3s ease",
-            "&:hover": {
-              boxShadow: "inset 0 0 12px rgba(0,0,0,0.35)",
-            },
           }}
         >
           <CardContent sx={{ p: 0 }}>
-            <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-              <TextField
+            <form onSubmit={handleSubmit}>
+                 <TextField
                 fullWidth
                 label="Name"
                 name="name"
+                value={formData.name}
+                onChange={handleChange}
                 required
                 variant="outlined"
-                sx={{
-                  mb: 3,
-                  input: { color: "#eee" },
-                  "& label": { color: "#00f7ff" },
-                  "& .MuiOutlinedInput-root": {
-                    backgroundColor: "rgba(0,0,0,0.12)",
-                    borderRadius: 2,
-                    "& fieldset": { borderColor: "#00f7ff" },
-                    "&:hover fieldset": { borderColor: "#0077ff" },
-                    "&.Mui-focused fieldset": {
-                      borderColor: "#00fff7",
-                      boxShadow: "0 0 4px #00fff7",
-                      backgroundColor: "rgba(0, 247, 255, 0.08)",
-                    },
-                  },
-                }}
+                sx={{ ...inputStyles, mb: 4 }}
               />
               <TextField
                 fullWidth
-                label="Email"
-                name="email"
-                type="email"
+                label="Subject"
+                name="subject"
+                value={formData.subject}
+                onChange={handleChange}
                 required
                 variant="outlined"
-                sx={{
-                  mb: 3,
-                  input: { color: "#eee" },
-                  "& label": { color: "#00f7ff" },
-                  "& .MuiOutlinedInput-root": {
-                    backgroundColor: "rgba(0,0,0,0.12)",
-                    borderRadius: 2,
-                    "& fieldset": { borderColor: "#00f7ff" },
-                    "&:hover fieldset": { borderColor: "#0077ff" },
-                    "&.Mui-focused fieldset": {
-                      borderColor: "#00fff7",
-                      boxShadow: "0 0 4px #00fff7",
-                      backgroundColor: "rgba(0, 247, 255, 0.08)",
-                    },
-                  },
-                }}
+                sx={inputStyles}
               />
               <TextField
                 fullWidth
                 label="Message"
                 name="message"
+                value={formData.message}
+                onChange={handleChange}
+                required
                 multiline
                 rows={4}
-                required
                 variant="outlined"
-                sx={{
-                  mb: 4,
-                  input: { color: "#eee" },
-                  "& label": { color: "#00f7ff" },
-                  "& .MuiOutlinedInput-root": {
-                    backgroundColor: "rgba(0,0,0,0.12)",
-                    borderRadius: 2,
-                    "& fieldset": { borderColor: "#00f7ff" },
-                    "&:hover fieldset": { borderColor: "#0077ff" },
-                    "&.Mui-focused fieldset": {
-                      borderColor: "#00fff7",
-                      boxShadow: "0 0 4px #00fff7",
-                      backgroundColor: "rgba(0, 247, 255, 0.08)",
-                    },
-                  },
-                }}
+                sx={{ ...inputStyles, mb: 4 }}
               />
-
               <Button
                 type="submit"
                 fullWidth
@@ -163,7 +122,6 @@ export default function Contact() {
                   fontWeight: 600,
                   py: 1.3,
                   textTransform: "none",
-                  transition: "all 0.3s ease",
                   "&:hover": {
                     backgroundColor: "#00f7ff",
                     color: "#000",
@@ -180,3 +138,20 @@ export default function Contact() {
     </Box>
   );
 }
+
+const inputStyles = {
+  mb: 3,
+  input: { color: "#eee" },
+  "& label": { color: "#00f7ff" },
+  "& .MuiOutlinedInput-root": {
+    backgroundColor: "rgba(0,0,0,0.12)",
+    borderRadius: 2,
+    "& fieldset": { borderColor: "#00f7ff" },
+    "&:hover fieldset": { borderColor: "#0077ff" },
+    "&.Mui-focused fieldset": {
+      borderColor: "#00fff7",
+      boxShadow: "0 0 4px #00fff7",
+      backgroundColor: "rgba(0, 247, 255, 0.08)",
+    },
+  },
+};
