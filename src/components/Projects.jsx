@@ -9,7 +9,7 @@ import {
   Button,
 } from "@mui/material";
 import { motion } from "framer-motion";
-import { keyframes } from "@emotion/react";
+import { moveGradient, gradientColors } from "./colorAnimation/gradient"; // ✅ Import shared styles
 
 const projects = [
   {
@@ -59,19 +59,6 @@ const projects = [
   },
 ];
 
-const gradientAnimation = keyframes`
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-`;
-
-const gradientBorder = "linear-gradient(270deg, #00fff7, #0077ff, #00fff7)";
 
 export default function Projects() {
   return (
@@ -80,11 +67,10 @@ export default function Projects() {
         variant="h4"
         gutterBottom
         sx={{
-          fontWeight: "bold",
+          fontWeight: 600,
           color: "#00f7ff",
           textAlign: "center",
-          mb: 6,
-          textShadow: "0 0 6px rgba(0, 247, 255, 0.5)",
+          mb: 4,
         }}
       >
         Projects
@@ -92,7 +78,7 @@ export default function Projects() {
 
       <Grid container spacing={4} justifyContent="center">
         {projects.map((p, i) => (
-          <Grid key={i} item>
+          <Grid key={i}>
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -107,11 +93,11 @@ export default function Projects() {
                 sx={{
                   borderRadius: 3,
                   p: "2px",
-                  background: gradientBorder,
-                  backgroundSize: "600% 600%",
-                  animation: `${gradientAnimation} 8s ease infinite`,
+                  background: `linear-gradient(270deg, ${gradientColors.join(",")})`,
+                  backgroundSize: "400% 100%",
+                  animation: `${moveGradient} 9s linear infinite`,
                   "&:hover": {
-                    animation: `${gradientAnimation} 4s ease infinite`,
+                    animation: `${moveGradient} 6s linear infinite`,
                     boxShadow: `0 0 6px #00e5ff, 0 0 12px #005eff, 0 0 18px #00e5ff`,
                     transform: "scale(1.05)",
                     transition: "transform 0.3s ease, box-shadow 0.3s ease",

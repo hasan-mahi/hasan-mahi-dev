@@ -7,34 +7,11 @@ import {
   IconButton,
   Tooltip,
 } from "@mui/material";
-import { circularFloat, glow } from "../animation/float";
-import { keyframes } from "@emotion/react";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
-
-// Smooth waving animation
-const wave = keyframes`
-  0% { transform: rotate(0deg) }
-  10% { transform: rotate(14deg) }
-  20% { transform: rotate(-8deg) }
-  30% { transform: rotate(14deg) }
-  40% { transform: rotate(-4deg) }
-  50% { transform: rotate(10deg) }
-  60% { transform: rotate(0deg) }
-  100% { transform: rotate(0deg) }
-`;
-
-// Fade + slide up animation
-const fadeSlideUp = keyframes`
-  0% {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-`;
+import GradientText from "../colorAnimation/GradientText";
+import { circularFloat, glow } from "./float";
+import { wave, fadeSlideUp } from "./heroEffects";
 
 export default function Hero() {
   return (
@@ -55,7 +32,7 @@ export default function Hero() {
         fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
       }}
     >
-      {/* Floating profile image */}
+      {/* 👤 Floating profile image */}
       <Box
         sx={{
           width: 180,
@@ -87,38 +64,38 @@ export default function Hero() {
         />
       </Box>
 
-      {/* Text Content */}
+      {/* 📄 Text and Info */}
       <Box
         maxWidth={550}
         sx={{
           animation: `${fadeSlideUp} 1.4s ease forwards`,
         }}
       >
-        {/* Subtitle and social icons side-by-side */}
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: 2,
-            mb: 1,
-            flexWrap: "wrap",
-          }}
-        >
-          <Typography
-            variant="subtitle2"
+        {/* 👨‍💻 Title and Social Icons */}
+          <Box
             sx={{
-              color: "#00f7ff",
-              letterSpacing: 3,
-              fontWeight: 700,
-              textTransform: "uppercase",
-              userSelect: "none",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "flex-start",
+              gap: 2,
+              mb: 1,
+              flexWrap: "wrap",
             }}
+          >
+            <Typography
+              variant="subtitle2"
+              sx={{
+                color: "#00f7ff",
+                letterSpacing: 3,
+                fontWeight: 700,
+                textTransform: "uppercase",
+                userSelect: "none",
+              }}
           >
             Full Stack Developer
           </Typography>
 
-          {/* Social Icons */}
+          {/* 🔗 GitHub */}
           <Tooltip title="GitHub" arrow>
             <IconButton
               component="a"
@@ -146,6 +123,7 @@ export default function Hero() {
             </IconButton>
           </Tooltip>
 
+          {/* 🔗 LinkedIn */}
           <Tooltip title="LinkedIn" arrow>
             <IconButton
               component="a"
@@ -174,6 +152,7 @@ export default function Hero() {
           </Tooltip>
         </Box>
 
+        {/* 🎨 Gradient Name + Emoji */}
         <Box
           sx={{
             display: "flex",
@@ -182,22 +161,24 @@ export default function Hero() {
             mb: 2,
           }}
         >
-          <Typography
-            variant="h2"
-            className="hero-title"
-            sx={{
-              fontWeight: 900,
-              fontSize: { xs: "2.4rem", sm: "3rem", md: "3.8rem" },
-              lineHeight: 1.1,
-              background: "linear-gradient(90deg, #00fff7, #0077ff, #00fff7)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              userSelect: "none",
-              margin: 0,
-            }}
-          >
-            Hi, I'm Hasan Mahi
-          </Typography>
+        <GradientText
+  colors={["#40ffaa", "#4079ff", "#40ffaa", "#4079ff", "#40ffaa", "#4079ff"]}
+  animationSpeed={8}
+  showBorder={false}
+  className="hero-title"
+  style={{
+    fontWeight: 600,
+    fontSize: "clamp(2rem, 4vw, 3rem)", // ⬅️ Slightly smaller
+    lineHeight: 1.2,
+    userSelect: "none",
+    margin: 0,
+  }}
+>
+  Hi, I'm Hasan Mahi
+</GradientText>
+
+
+          {/* 👋 Waving Emoji */}
           <Box
             component="span"
             sx={{
@@ -218,6 +199,7 @@ export default function Hero() {
           </Box>
         </Box>
 
+        {/* 📝 Description */}
         <Typography
           variant="body1"
           sx={{
@@ -228,11 +210,12 @@ export default function Hero() {
           }}
         >
           Passionate about building modern, scalable web apps using{" "}
-          <strong>React</strong>, <strong>Node.js</strong>, and{" "}
+          <strong>Node.js</strong>, <strong>Laravel</strong>, <strong>React</strong> and{" "}
           <strong>MongoDB</strong>. I create seamless user experiences,
           blending clean code with solid backend logic.
         </Typography>
 
+        {/* 🔘 CTA Buttons */}
         <Stack
           direction={{ xs: "column", sm: "row" }}
           spacing={3}

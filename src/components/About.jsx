@@ -27,11 +27,10 @@ export default function About() {
   variant="h4"
   gutterBottom
   sx={{
-    fontWeight: "bold",
+    fontWeight: 600,
     color: "#00f7ff", // same cyan color
     textAlign: "center",
     mb: 4,
-    textShadow: "0 0 4px rgba(0, 247, 255, 0.4)", // less bright and more subtle glow
   }}
 >
   About Me

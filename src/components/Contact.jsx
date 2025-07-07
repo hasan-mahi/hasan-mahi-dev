@@ -36,14 +36,10 @@ export default function Contact() {
       <Typography
         variant="h4"
         sx={{
-          fontWeight: "bold",
-          mb: 5,
-          textAlign: "center",
-          background: "linear-gradient(90deg, #00fff7, #0077ff)",
-          WebkitBackgroundClip: "text",
-          WebkitTextFillColor: "transparent",
-          textShadow: "0 0 6px rgba(0, 247, 255, 0.3)",
-          letterSpacing: "0.05em",
+          fontWeight: 600,
+    color: "#00f7ff", // same cyan color
+    textAlign: "center",
+    mb: 4,
         }}
       >
         Contact Me
