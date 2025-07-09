@@ -1,6 +1,29 @@
-// src/components/About.jsx
 import { Box, Typography, Paper } from "@mui/material";
 import { motion } from "framer-motion";
+import { moveGradient, gradientColors } from "./colorAnimation/gradient"; // adjust path
+
+const cardData = [
+  {
+    title: "Background",
+    content:
+      "🎓 IT Graduate from Multimedia University with a strong foundation in software engineering and full-stack development.",
+  },
+  {
+    title: "Core Skills",
+    content:
+      "💡 Proficient in React, Node.js, MongoDB, Laravel, and MySQL. Skilled in building scalable, secure web applications.",
+  },
+  {
+    title: "Experience",
+    content:
+      "🧠 Delivered production-grade apps including real-time auctions, service systems, and admin dashboards.",
+  },
+  {
+    title: "Mindset",
+    content:
+      "🚀 Passionate about clean code, continuous learning, and building user-centric software that delivers real value.",
+  },
+];
 
 const containerVariants = {
   hidden: { opacity: 0, y: 30 },
@@ -12,69 +35,97 @@ const containerVariants = {
 };
 
 export default function About() {
-  const highlightColor = "#00f7ff"; // Softer cyan consistent with your theme
-
   return (
     <Box
       component={motion.section}
+      id="about"
       variants={containerVariants}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.3 }}
-      sx={{ py: 8, maxWidth: 700, mx: "auto", px: 2 }}
+      sx={{
+        py: 8,
+        px: { xs: 2, sm: 4, md: 6 },
+        maxWidth: "1200px",
+        mx: "auto",
+      }}
     >
-  <Typography
-  variant="h4"
-  gutterBottom
-  sx={{
-    fontWeight: 600,
-    color: "#00f7ff", // same cyan color
-    textAlign: "center",
-    mb: 4,
-  }}
->
-  About Me
-</Typography>
-
-
-
-      <Paper
-        elevation={4}
+      <Typography
+        variant="h4"
+        gutterBottom
         sx={{
-          p: 4,
-          borderRadius: 3,
-          backgroundColor: "#1e1e1e",
-          boxShadow: `0 4px 15px rgba(0, 247, 255, 0.15)`,
-          color: "#ddd",
-          lineHeight: 1.6,
-          fontSize: "1.1rem",
-          fontWeight: 500,
-          letterSpacing: 0.5,
+          fontWeight: 600,
+          color: "#00f7ff",
           textAlign: "center",
+          mb: 5,
         }}
       >
-        {[
-          "🎓 IT Graduate from Multimedia University, passionate about full-stack development and writing clean, scalable code.",
-          "💻 Practical experience building real-world apps: dynamic security systems at AFC, real-time bidding platforms, and full-stack solutions using React, Node.js, Laravel, MySQL & MongoDB.",
-          "🚀 Committed to delivering secure, user-friendly software, constantly growing through certifications and self-learning.",
-          "🌟 Excited to contribute innovation and dedication to your development team.",
-        ].map((text, index) => (
-          <Typography
-            key={index}
+        About Me
+      </Typography>
+
+      <Box
+        sx={{
+          display: "grid",
+          gridTemplateColumns: {
+            xs: "1fr",
+            sm: "1fr 1fr",
+            md: "repeat(3, 1fr)",
+            lg: "repeat(4, 1fr)",
+          },
+          gap: 4,
+        }}
+      >
+        {cardData.map((card, idx) => (
+          <Box
+            key={idx}
             sx={{
-              mb: index === 3 ? 0 : 2,
-              transition: "color 0.25s ease, transform 0.25s ease",
-              cursor: "default",
+              borderRadius: 3,
+              p: "2px",
+              background: `linear-gradient(270deg, ${gradientColors.join(",")})`,
+              backgroundSize: "400% 100%",
+              animation: `${moveGradient} 9s linear infinite`,
+              transition: "transform 0.3s ease, box-shadow 0.3s ease",
               "&:hover": {
-                color: highlightColor,
-                transform: "scale(1.02)",
+                animation: `${moveGradient} 6s linear infinite`,
+                boxShadow: `0 0 6px #00e5ff, 0 0 12px #005eff, 0 0 18px #00e5ff`,
+                transform: "scale(1.05)",
               },
             }}
           >
-            {text}
-          </Typography>
+            <Paper
+              elevation={4}
+              component={motion.div}
+              whileHover={{ scale: 1.03 }}
+              transition={{ type: "spring", stiffness: 300 }}
+              sx={{
+                p: 4,
+                borderRadius: 3,
+                backgroundColor: "#1e1e1e",
+                color: "#ddd",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "flex-start",
+                height: "100%",
+                border: "none",
+              }}
+            >
+              <Typography
+                variant="h6"
+                sx={{
+                  color: "#00f7ff",
+                  fontWeight: 700,
+                  mb: 1.5,
+                }}
+              >
+                {card.title}
+              </Typography>
+              <Typography sx={{ fontSize: "1rem", lineHeight: 1.6 }}>
+                {card.content}
+              </Typography>
+            </Paper>
+          </Box>
         ))}
-      </Paper>
+      </Box>
     </Box>
   );
 }

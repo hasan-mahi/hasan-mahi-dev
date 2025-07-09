@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import Switch from "./Switch";
-import MobileMenuDrawer from "./MobileMenuDrawer"; // Import new component
+import MobileMenuDrawer from "./MobileMenuDrawer";
 
 const navLinks = [
   { label: "About", href: "#about" },
@@ -52,7 +52,6 @@ export default function Header() {
 
     sections.forEach((section) => observer.current.observe(section));
 
-    // 🟢 Scroll to section on initial load if hash is present
     const hash = window.location.hash;
     if (hash) {
       const target = document.querySelector(hash);
@@ -80,9 +79,16 @@ export default function Header() {
         position="sticky"
         elevation={0}
         sx={{
-          bgcolor: trigger ? "rgba(0,224,224,0.05)" : "transparent",
-          backdropFilter: trigger ? "blur(12px)" : "none",
-          borderBottom: trigger ? "1px solid rgba(0,224,224,0.1)" : "none",
+          bgcolor: {
+            xs: "transparent", // Mobile screens always transparent background
+            sm: "transparent", // Mobile/tablet also transparent
+            md: "#121212",      // Desktop dark theme black background by default
+          },
+          ...(trigger && {
+            bgcolor: "rgba(0,224,224,0.05)", // blur background on scroll (all screens)
+            backdropFilter: "blur(12px)",
+            borderBottom: "1px solid rgba(0,224,224,0.1)",
+          }),
           boxShadow: "none",
           transition: "all 0.3s ease-in-out",
         }}
@@ -119,8 +125,11 @@ export default function Header() {
                 </Button>
               ))}
 
-              {/* Resume Button - Desktop */}
-              <a href="/Hasan-Mahi-Resume.pdf" download style={{ textDecoration: "none" }}>
+              <a
+                href="/Hasan-Mahi-Resume.pdf"
+                download
+                style={{ textDecoration: "none" }}
+              >
                 <Button
                   variant="contained"
                   sx={{
@@ -150,7 +159,6 @@ export default function Header() {
         </Toolbar>
       </AppBar>
 
-      {/* Mobile Drawer */}
       <Drawer
         anchor="right"
         open={drawerOpen}

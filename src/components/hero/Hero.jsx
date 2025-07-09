@@ -163,29 +163,30 @@ export default function Hero() {
           spacing={3}
           sx={{ width: { xs: "100%", sm: "auto" } }}
         >
-          <Button
-            variant="contained"
-            href="#projects"
-            sx={{
-              px: 5,
-              py: 1.5,
-              fontWeight: 700,
-              fontSize: "1rem",
-              backgroundColor: "#00f7ff",
-              color: "#000",
-              boxShadow: "0 0 15px #00f7ff",
-              borderRadius: 2,
-              textTransform: "none",
-              transition: "all 0.3s ease",
-              "&:hover": {
-                backgroundColor: "#0ff",
-                boxShadow: "0 0 30px #00f7ff",
-                transform: "scale(1.05)",
-              },
-            }}
-          >
-            View My Work
-          </Button>
+<Button
+  variant="contained"
+  href="#projects"
+  sx={{
+    px: 5,
+    py: 1.5,
+    fontWeight: 700,
+    fontSize: "1rem",
+    backgroundColor: "#00f7ff",
+    color: "#000",
+    boxShadow: "0 0 8px rgba(0, 247, 255, 0.5)",
+    borderRadius: 2,
+    textTransform: "none",
+    transition: "all 0.3s ease",
+    "&:hover": {
+      backgroundColor: "#0ff",
+      boxShadow: "0 0 15px rgba(0, 247, 255, 0.7)",
+      transform: "scale(1.02)",
+    },
+  }}
+>
+  View My Work
+</Button>
+
 
           <Button
             variant="outlined"
