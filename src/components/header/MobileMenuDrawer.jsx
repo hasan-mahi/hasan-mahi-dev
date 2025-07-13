@@ -1,6 +1,12 @@
-// MobileMenuDrawer.jsx
 import React from "react";
-import { Box, List, ListItem, ListItemButton, ListItemText, Button } from "@mui/material";
+import {
+  Box,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  Button,
+} from "@mui/material";
 import { motion } from "framer-motion";
 
 const navLinks = [
@@ -30,15 +36,26 @@ const itemVariants = {
   },
 };
 
-export default function MobileMenuDrawer({ drawerOpen, toggleDrawer, activeSection }) {
-  // Handle clicks on links with delay to allow scroll on mobile
+export default function MobileMenuDrawer({
+  drawerOpen,
+  toggleDrawer,
+  activeSection,
+}) {
+  // Close drawer on Escape key press only
+  const handleKeyDown = (event) => {
+    if (event.key === "Escape") toggleDrawer(false);
+  };
+
+  // Handle clicks on anchor links inside the drawer with delay to allow smooth scroll
   const handleDrawerClick = (e) => {
     const anchor = e.target.closest("a");
     if (anchor && anchor.getAttribute("href")?.startsWith("#")) {
       setTimeout(() => toggleDrawer(false), 200);
-    } else {
+    } else if (anchor) {
+      // External or non-hash links close immediately
       toggleDrawer(false);
     }
+    // Clicking outside links does not close drawer
   };
 
   return (
@@ -53,7 +70,10 @@ export default function MobileMenuDrawer({ drawerOpen, toggleDrawer, activeSecti
         py: 3,
       }}
       onClick={handleDrawerClick}
-      onKeyDown={() => toggleDrawer(false)}
+      onKeyDown={handleKeyDown}
+      role="navigation"
+      aria-label="mobile navigation menu"
+      tabIndex={-1}
     >
       <List
         component={motion.ul}
@@ -61,6 +81,7 @@ export default function MobileMenuDrawer({ drawerOpen, toggleDrawer, activeSecti
         initial="closed"
         animate={drawerOpen ? "open" : "closed"}
         sx={{ p: 0, m: 0, mt: 2 }}
+        aria-live="polite"
       >
         {navLinks.map(({ label, href }) => (
           <ListItem
@@ -73,6 +94,7 @@ export default function MobileMenuDrawer({ drawerOpen, toggleDrawer, activeSecti
             <ListItemButton
               component="a"
               href={href}
+              aria-current={activeSection === href ? "page" : undefined}
               sx={{
                 color: activeSection === href ? "#0ff" : "#00e0e0",
                 fontWeight: 600,

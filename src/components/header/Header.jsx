@@ -26,7 +26,11 @@ export default function Header() {
   const [activeSection, setActiveSection] = useState(null);
   const observer = useRef(null);
 
+  // Scroll trigger with hysteresis disabled, threshold 40px
   const trigger = useScrollTrigger({ disableHysteresis: true, threshold: 40 });
+
+  // Only apply scroll trigger effects on desktop
+  const effectiveTrigger = !isMobile && trigger;
 
   useEffect(() => {
     if (!isMobile && drawerOpen) setDrawerOpen(false);
@@ -79,16 +83,13 @@ export default function Header() {
         position="sticky"
         elevation={0}
         sx={{
-          bgcolor: {
-            xs: "transparent", // Mobile screens always transparent background
-            sm: "transparent", // Mobile/tablet also transparent
-            md: "#121212",      // Desktop dark theme black background by default
-          },
-          ...(trigger && {
-            bgcolor: "rgba(0,224,224,0.05)", // blur background on scroll (all screens)
-            backdropFilter: "blur(12px)",
-            borderBottom: "1px solid rgba(0,224,224,0.1)",
-          }),
+          bgcolor: isMobile
+            ? "transparent !important" // force transparent on mobile
+            : effectiveTrigger
+            ? "rgba(0,224,224,0.05)"
+            : "#121212",
+          backdropFilter: effectiveTrigger ? "blur(12px)" : "none",
+          borderBottom: effectiveTrigger ? "1px solid rgba(0,224,224,0.1)" : "none",
           boxShadow: "none",
           transition: "all 0.3s ease-in-out",
         }}

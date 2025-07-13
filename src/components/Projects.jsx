@@ -15,7 +15,7 @@ const projects = [
   {
     title: "Online Auto Auction System",
     description: [
-      "Car auction platform with real-time bidding",
+      "Car auction platform with real-time bidding using Socket.IO",
       "MongoDB for data storage",
       "Push notifications and user authentication",
     ],
@@ -36,7 +36,7 @@ const projects = [
     title: "Airbnb Project",
     description: [
       "Full-stack Airbnb clone",
-      "Booking platform using React and Node.js",
+      "Booking platform using Bootstrap and Node.js",
       "Dynamic listings and authentication",
     ],
     link: "https://github.com/hasan-mahi/Airbnb-Project",
@@ -46,7 +46,7 @@ const projects = [
     title: "Tenant Management System",
     description: [
       "Manage tenants and rental agreements",
-      "Built with React and Node.js",
+      "Built with Laravel, Node.js and MySQL",
       "Includes authentication and dashboard",
     ],
     link: "https://github.com/hasan-mahi/Tenant-Management_admin",
