@@ -1,9 +1,10 @@
 import React from "react";
 import { Box, Typography, Button, Stack } from "@mui/material";
-import GradientText from "../colorAnimation/GradientText"; // Adjust path if needed
-import SocialLinks from "./SocialLinks"; // Adjust path if needed
+import GradientText from "../colorAnimation/GradientText";
+import SocialLinks from "./SocialLinks";
 import { circularFloat, glow } from "./float";
 import { wave, fadeSlideUp } from "./heroEffects";
+import Orb from "./Orb";
 
 export default function Hero() {
   return (
@@ -24,30 +25,51 @@ export default function Hero() {
         fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
       }}
     >
-      {/* Floating Profile Image */}
+      {/* Profile Image with Orb Around */}
       <Box
         sx={{
-          width: 180,
-          height: 180,
+          width: 220,
+          height: 220,
           position: "relative",
           flexShrink: 0,
-          borderRadius: "50%",
-          boxShadow: "0 10px 25px rgba(0, 247, 255, 0.3)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
           animation: `${fadeSlideUp} 1.2s ease forwards`,
         }}
       >
+        {/* Orb behind the image */}
+        <Box
+          sx={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            zIndex: 0,
+          }}
+        >
+          <Orb
+            hoverIntensity={0.5}
+            rotateOnHover={true}
+            hue={190}
+            forceHoverState={false}
+          />
+        </Box>
+
+        {/* Profile Image */}
         <Box
           component="img"
           src="/profile.jpeg"
-          alt="Hasan"
+          alt="Hasan Mahi Profile"
           sx={{
             width: 180,
             height: 180,
             borderRadius: "50%",
             objectFit: "cover",
-            position: "absolute",
-            top: 0,
-            left: 0,
+            position: "relative",
+            zIndex: 1,
+            boxShadow: "0 10px 25px rgba(0, 247, 255, 0.3)",
             animation: `
               ${circularFloat} 6s ease-in-out infinite,
               ${glow} 4s ease-in-out infinite
@@ -63,7 +85,7 @@ export default function Hero() {
           animation: `${fadeSlideUp} 1.4s ease forwards`,
         }}
       >
-        {/* Title and Social Links */}
+        {/* Role & Social Links */}
         <Box sx={{ mb: 1 }}>
           <Typography
             variant="subtitle2"
@@ -78,18 +100,17 @@ export default function Hero() {
             Full Stack Developer
           </Typography>
 
-          {/* Social links - only on md and up */}
           <Box sx={{ display: { xs: "none", md: "flex" }, gap: 2, mt: 2 }}>
             <SocialLinks />
           </Box>
         </Box>
 
-        {/* Social links - only on small screen below the title */}
+        {/* Mobile Social Links */}
         <Box sx={{ display: { xs: "flex", md: "none" }, gap: 2, mb: 2 }}>
           <SocialLinks />
         </Box>
 
-        {/* Gradient name with waving emoji */}
+        {/* Name with waving emoji */}
         <Box
           sx={{
             display: "flex",
@@ -99,14 +120,7 @@ export default function Hero() {
           }}
         >
           <GradientText
-            colors={[
-              "#40ffaa",
-              "#4079ff",
-              "#40ffaa",
-              "#4079ff",
-              "#40ffaa",
-              "#4079ff",
-            ]}
+            colors={["#40ffaa", "#4079ff", "#40ffaa", "#4079ff"]}
             animationSpeed={8}
             showBorder={false}
             className="hero-title"
@@ -130,8 +144,6 @@ export default function Hero() {
               fontSize: "1.6em",
               userSelect: "none",
               color: "#00f7ff",
-              WebkitTextFillColor: "unset",
-              background: "none",
               lineHeight: 1,
             }}
             aria-label="waving hand"
@@ -152,9 +164,9 @@ export default function Hero() {
           }}
         >
           Passionate about building modern, scalable web apps using{" "}
-          <strong>Node.js</strong>, <strong>Laravel</strong>, <strong>React</strong>{" "}
-          and <strong>MongoDB</strong>. I create seamless user experiences,
-          blending clean code with solid backend logic.
+          <strong>Node.js</strong>, <strong>Laravel</strong>, <strong>React</strong>, and{" "}
+          <strong>MongoDB</strong>. I create seamless user experiences blending clean
+          code with solid backend logic.
         </Typography>
 
         {/* Call to Action Buttons */}
@@ -163,30 +175,29 @@ export default function Hero() {
           spacing={3}
           sx={{ width: { xs: "100%", sm: "auto" } }}
         >
-<Button
-  variant="contained"
-  href="#projects"
-  sx={{
-    px: 5,
-    py: 1.5,
-    fontWeight: 700,
-    fontSize: "1rem",
-    backgroundColor: "#00f7ff",
-    color: "#000",
-    boxShadow: "0 0 8px rgba(0, 247, 255, 0.5)",
-    borderRadius: 2,
-    textTransform: "none",
-    transition: "all 0.3s ease",
-    "&:hover": {
-      backgroundColor: "#0ff",
-      boxShadow: "0 0 15px rgba(0, 247, 255, 0.7)",
-      transform: "scale(1.02)",
-    },
-  }}
->
-  View My Work
-</Button>
-
+          <Button
+            variant="contained"
+            href="#projects"
+            sx={{
+              px: 5,
+              py: 1.5,
+              fontWeight: 700,
+              fontSize: "1rem",
+              backgroundColor: "#00f7ff",
+              color: "#000",
+              boxShadow: "0 0 8px rgba(0, 247, 255, 0.5)",
+              borderRadius: 2,
+              textTransform: "none",
+              transition: "all 0.3s ease",
+              "&:hover": {
+                backgroundColor: "#0ff",
+                boxShadow: "0 0 15px rgba(0, 247, 255, 0.7)",
+                transform: "scale(1.02)",
+              },
+            }}
+          >
+            View My Work
+          </Button>
 
           <Button
             variant="outlined"
