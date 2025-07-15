@@ -1,6 +1,7 @@
 import { Box, Typography, Paper } from "@mui/material";
 import { motion } from "framer-motion";
-import { moveGradient, gradientColors } from "./colorAnimation/gradient"; // adjust path
+import AnimatedGradientBorder from "../colorAnimation/AnimatedGradientBorder"; // Adjust if needed
+import SimpleIconScroller from "./SimpleIconScroller"; // Import new scroller
 
 const cardData = [
   {
@@ -33,6 +34,8 @@ const containerVariants = {
     transition: { duration: 0.8, ease: "easeOut" },
   },
 };
+
+const gradientColors = ["#40ffaa", "#4079ff", "#40ffaa", "#4079ff"];
 
 export default function About() {
   return (
@@ -76,21 +79,12 @@ export default function About() {
         }}
       >
         {cardData.map((card, idx) => (
-          <Box
+          <AnimatedGradientBorder
             key={idx}
-            sx={{
-              borderRadius: 3,
-              p: "2px",
-              background: `linear-gradient(270deg, ${gradientColors.join(",")})`,
-              backgroundSize: "400% 100%",
-              animation: `${moveGradient} 9s linear infinite`,
-              transition: "transform 0.3s ease, box-shadow 0.3s ease",
-              "&:hover": {
-                animation: `${moveGradient} 6s linear infinite`,
-                boxShadow: `0 0 6px #00e5ff, 0 0 12px #005eff, 0 0 18px #00e5ff`,
-                transform: "scale(1.05)",
-              },
-            }}
+            colors={gradientColors}
+            animationSpeed={9}
+            borderRadius="1.25rem"
+            padding="2px"
           >
             <Paper
               elevation={4}
@@ -99,7 +93,7 @@ export default function About() {
               transition={{ type: "spring", stiffness: 300 }}
               sx={{
                 p: 4,
-                borderRadius: 3,
+                borderRadius: "1.25rem",
                 backgroundColor: "#1e1e1e",
                 color: "#ddd",
                 display: "flex",
@@ -123,9 +117,12 @@ export default function About() {
                 {card.content}
               </Typography>
             </Paper>
-          </Box>
+          </AnimatedGradientBorder>
         ))}
       </Box>
+
+      {/* Use the new SimpleIconScroller here */}
+      <SimpleIconScroller />
     </Box>
   );
 }

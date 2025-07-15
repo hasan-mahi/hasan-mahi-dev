@@ -1,10 +1,11 @@
 // src/App.jsx
 import React from "react";
+import '@fortawesome/fontawesome-free/css/all.min.css';
 import { CssBaseline, Box } from "@mui/material";
 
 import Header from "./components/header/Header";
 import Hero from "./components/hero/Hero";
-import About from "./components/About";
+import About from "./components/about/About";
 import Projects from "./components/Projects";
 import Skills from "./components/Skills";
 import Contact from "./components/Contact";

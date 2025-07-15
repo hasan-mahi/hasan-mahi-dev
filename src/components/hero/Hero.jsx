@@ -20,9 +20,9 @@ export default function Hero() {
         alignItems: "center",
         justifyContent: "center",
         gap: { xs: 6, md: 10 },
-        color: "text.primary",
-        backgroundColor: "background.default",
-        fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+        // color: "text.primary",
+        // backgroundColor: "background.default",
+        // fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
       }}
     >
       {/* Profile Image with Orb Around */}
@@ -38,21 +38,23 @@ export default function Hero() {
           animation: `${fadeSlideUp} 1.2s ease forwards`,
         }}
       >
-        {/* Orb behind the image */}
+        {/* Orb wrapping around the image */}
         <Box
           sx={{
             position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: 260,
+            height: 260,
             zIndex: 0,
+            // pointerEvents: "none", // so it doesn’t block hover/focus
           }}
         >
           <Orb
             hoverIntensity={0.5}
             rotateOnHover={true}
-            hue={190}
+            hue={60}
             forceHoverState={false}
           />
         </Box>
@@ -71,13 +73,12 @@ export default function Hero() {
             zIndex: 1,
             boxShadow: "0 10px 25px rgba(0, 247, 255, 0.3)",
             animation: `
-              ${circularFloat} 6s ease-in-out infinite,
-              ${glow} 4s ease-in-out infinite
-            `,
+        ${circularFloat} 6s ease-in-out infinite,
+        6s ease-in-out infinite
+      `,
           }}
         />
       </Box>
-
       {/* Text Content */}
       <Box
         maxWidth={550}
@@ -136,7 +137,7 @@ export default function Hero() {
           </GradientText>
 
           <Box
-            component="span"
+            // component="span"
             sx={{
               display: "inline-block",
               animation: `${wave} 2.5s cubic-bezier(.36,.07,.19,.97) infinite`,
@@ -164,9 +165,10 @@ export default function Hero() {
           }}
         >
           Passionate about building modern, scalable web apps using{" "}
-          <strong>Node.js</strong>, <strong>Laravel</strong>, <strong>React</strong>, and{" "}
-          <strong>MongoDB</strong>. I create seamless user experiences blending clean
-          code with solid backend logic.
+          <strong>Node.js</strong>, <strong>Laravel</strong>,{" "}
+          <strong>React</strong>, and <strong>MongoDB</strong>. I create
+          seamless user experiences blending clean code with solid backend
+          logic.
         </Typography>
 
         {/* Call to Action Buttons */}

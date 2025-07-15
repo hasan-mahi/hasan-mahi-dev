@@ -1,34 +1,21 @@
-import React from "react";
-import { Box } from "@mui/material";
-import { gradientColors, moveGradient } from "./gradient";
+import "./GradientText.css";
 
 export default function GradientText({
   children,
-  colors = gradientColors,
-  animationSpeed = 9,
-  showBorder = false,
   className = "",
-  style = {},
+  colors = ["#40ffaa", "#4079ff", "#40ffaa", "#4079ff", "#40ffaa"],
+  animationSpeed = 8,
+  showBorder = false
 }) {
+  const gradientStyle = {
+    backgroundImage: `linear-gradient(to right, ${colors.join(", ")})`,
+    animationDuration: `${animationSpeed}s`,
+  };
+
   return (
-    <Box
-      component="span"
-      className={className}
-      sx={{
-        display: "inline-block",
-        background: `linear-gradient(270deg, ${colors.join(",")})`,
-        backgroundSize: "400% 100%",
-        WebkitBackgroundClip: "text",
-        WebkitTextFillColor: "transparent",
-        animation: `${moveGradient} ${animationSpeed}s linear infinite`,
-        ...(showBorder && {
-          borderBottom: "2px solid",
-          borderImage: `linear-gradient(270deg, ${colors.join(",")}) 1`,
-        }),
-        ...style,
-      }}
-    >
-      {children}
-    </Box>
+    <div className={`animated-gradient-text ${className}`}>
+      {showBorder && <div className="gradient-overlay" style={gradientStyle}></div>}
+      <div className="text-content" style={gradientStyle}>{children}</div>
+    </div>
   );
 }
