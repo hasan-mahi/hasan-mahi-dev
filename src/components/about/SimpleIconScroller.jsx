@@ -1,7 +1,6 @@
 import React from "react";
 import { Box } from "@mui/material";
 
-// Font Awesome icon class to brand color map
 const iconStyles = {
   "fab fa-react": "#61DAFB",
   "fab fa-node-js": "#3C873A",
@@ -10,7 +9,6 @@ const iconStyles = {
   "fas fa-server": "#00758F",
   "fab fa-js": "#F7DF1E",
   "fab fa-git-alt": "#F05032",
-  "fab fa-docker": "#0db7ed",
   "fas fa-code": "#00f7ff",
   "fab fa-github": "#ffffff",
 };
@@ -18,7 +16,7 @@ const iconStyles = {
 const icons = Object.keys(iconStyles);
 
 export default function SimpleIconScroller() {
-  const scrollSpeed = 20; // duration in seconds
+  const scrollSpeed = 30; // increased duration for smoother slow scroll
 
   return (
     <Box
@@ -32,14 +30,12 @@ export default function SimpleIconScroller() {
         borderRadius: 2,
         backgroundColor: "transparent",
 
-        // Smooth edge fade effect using CSS masking
         WebkitMaskImage:
           "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
         maskImage:
           "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
       }}
     >
-      {/* Scrolling icon list */}
       <Box
         component="ul"
         sx={{
@@ -52,6 +48,7 @@ export default function SimpleIconScroller() {
           whiteSpace: "nowrap",
           alignItems: "center",
           height: "100%",
+          willChange: "transform",
         }}
       >
         {[...icons, ...icons].map((iconClass, idx) => (
@@ -71,7 +68,6 @@ export default function SimpleIconScroller() {
         ))}
       </Box>
 
-      {/* Keyframes for scroll animation */}
       <style>{`
         @keyframes scrollLeft {
           0% {
