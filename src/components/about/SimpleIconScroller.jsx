@@ -14,9 +14,10 @@ const iconStyles = {
 };
 
 const icons = Object.keys(iconStyles);
+const repeatedIcons = [...icons, ...icons, ...icons]; // Repeat for smooth motion
 
-export default function SimpleIconScroller() {
-  const scrollSpeed = 30; // increased duration for smoother slow scroll
+export default function BidirectionalIconScroller() {
+  const scrollSpeed = 14; // Seconds for one direction
 
   return (
     <Box
@@ -29,7 +30,6 @@ export default function SimpleIconScroller() {
         userSelect: "none",
         borderRadius: 2,
         backgroundColor: "transparent",
-
         WebkitMaskImage:
           "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
         maskImage:
@@ -44,14 +44,14 @@ export default function SimpleIconScroller() {
           listStyle: "none",
           p: 0,
           m: 0,
-          animation: `scrollLeft ${scrollSpeed}s linear infinite`,
+          animation: `scrollBackAndForth ${scrollSpeed}s linear infinite alternate`,
           whiteSpace: "nowrap",
           alignItems: "center",
           height: "100%",
           willChange: "transform",
         }}
       >
-        {[...icons, ...icons].map((iconClass, idx) => (
+        {repeatedIcons.map((iconClass, idx) => (
           <Box
             key={idx}
             component="li"
@@ -69,12 +69,12 @@ export default function SimpleIconScroller() {
       </Box>
 
       <style>{`
-        @keyframes scrollLeft {
+        @keyframes scrollBackAndForth {
           0% {
-            transform: translateX(0);
+            transform: translateX(0%);
           }
           100% {
-            transform: translateX(-50%);
+            transform: translateX(-33.33%);
           }
         }
       `}</style>

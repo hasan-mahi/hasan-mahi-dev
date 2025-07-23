@@ -20,7 +20,8 @@ const projects = [
       "Push notifications and user authentication",
     ],
     link: "https://github.com/hasan-mahi/Online-Auto-Auction-System-Car-based-Auction",
-    image: "https://github.com/hasan-mahi/Online-Auto-Auction-System-Car-based-Auction",
+    image:
+      "https://github.com/hasan-mahi/Online-Auto-Auction-System-Car-based-Auction",
   },
   {
     title: "Restaurant Ordering System",
@@ -61,6 +62,17 @@ const projects = [
     ],
     link: "https://github.com/hasan-mahi/Car-Service-Booking-System",
     image: "https://github.com/hasan-mahi/Car-Service-Booking-System",
+  },
+  {
+    title: "Expense Tracker",
+    description: [
+      "Add transactions (Income or Expense)",
+      "View all transactions in a table",
+      "See daily summary with an interactive bar chart",
+      "Dark mode enabled UI for comfortable viewing",
+    ],
+    link: "https://github.com/hasan-mahi/Expense-Tracker",
+    image: "https://github.com/hasan-mahi/Expense-Tracker",
   },
 ];
 
@@ -112,7 +124,9 @@ export default function Projects() {
               sx={{
                 borderRadius: 3,
                 p: "2px",
-                background: `linear-gradient(270deg, ${gradientColors.join(",")})`,
+                background: `linear-gradient(270deg, ${gradientColors.join(
+                  ","
+                )})`,
                 backgroundSize: "400% 100%",
                 animation: `${moveGradient} 9s linear infinite`,
                 "&:hover": {
@@ -206,4 +220,3 @@ export default function Projects() {
     </Box>
   );
 }
-

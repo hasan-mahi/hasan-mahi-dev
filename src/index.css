@@ -1,26 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Bitcount+Single:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* ===== Global Resets ===== */
 html, body, #root {
-  height: 100%;
   margin: 0;
   padding: 0;
-  scroll-behavior: smooth;
+  height: 100%;
+  width: 100%;
   background-color: #121212;
-  color: #fff;
-  overflow-x: hidden; /* ✅ Prevent horizontal scroll */
+  color: #ffffff;
+  font-family: 'Roboto', sans-serif;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -ms-overflow-style: none;      /* IE/Edge */
+  scrollbar-width: none;         /* Firefox */
 }
 
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+.snap-container::-webkit-scrollbar {
+  display: none;                 /* Chrome, Safari */
+}
+
+/* ===== Scroll Snap Container ===== */
 .snap-container {
   height: 100vh;
-  overflow-y: auto; /* ✅ Enable vertical scroll here */
-  overflow-x: hidden; /* ✅ Safety */
+  overflow-y: auto;
+  overflow-x: hidden;
   scroll-snap-type: y mandatory;
   -webkit-overflow-scrolling: touch;
 }
 
+/* ===== Section Snap Child ===== */
 .snap-child {
   scroll-snap-align: start;
   min-height: 100vh;
-  padding: 64px 20px; /* Assuming your header is 64px */
+  padding: 64px 20px;
   box-sizing: border-box;
   width: 100%;
-  overflow-x: hidden; /* ✅ Safety for child elements */
+  overflow-x: hidden;
+}
+
+/* ===== Use Bitcount only for section headings ===== */
+.snap-child h1,
+section h1,
+h1.section-title {
+  font-family: 'Bitcount Single', monospace;
 }
